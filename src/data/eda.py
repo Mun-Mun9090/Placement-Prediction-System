@@ -35,9 +35,17 @@ def basic_eda(df):
     plt.savefig(r"E:\PythonProject\Placement_Prediction_System\results\placement_status.png")
     plt.show()
 
-
+def univariate(df):
+    plt.figure(figsize=(6,5))
+    plt.hist(df["CGPA"],bins=10,color="yellow")
+    plt.title("Histogram of CGPA")
+    plt.xlabel("CGPA")
+    plt.ylabel("Frequency")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\results\cgpa_stats.png")
+    plt.show()
 
 
 if __name__=="__main__":
     df=load_data()
     basic_eda(df)
+    univariate(df)
