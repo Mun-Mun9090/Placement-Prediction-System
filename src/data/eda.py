@@ -43,9 +43,38 @@ def univariate(df):
     plt.ylabel("Frequency")
     plt.savefig(r"E:\PythonProject\Placement_Prediction_System\results\cgpa_stats.png")
     plt.show()
+    gendercount = df["Gender"].value_counts()
+    plt.figure(figsize=(6,5))
+    plt.pie(gendercount,labels=gendercount.index,autopct="%1.1f%%",startangle=90)
+    plt.title("Distribution of Gender")
+    plt.xlabel("Gender")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\results\gender_count.png")
+    plt.show()
 
+def bivariate(df):
+
+    #Scatter plot
+    plt.figure(figsize=(6,5))
+    plt.scatter(df["CGPA"],df["AptitudeTestScore"],color="orange")
+    plt.title("CGPA vs Aptitude Score")
+    plt.xlabel("CGPA")
+    plt.ylabel("Aptitude Score")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\results\cgpa aptitude scores.png")
+    plt.show()
+    plt.close()
+
+    plt.figure(figsize=(6,5))
+    placed=df[df["PlacementStatus"]==1]["CGPA"]
+    not_placed=df[df["PlacementStatus"]==0]["CGPA"]
+    plt.boxplot([placed,not_placed],label=["placed","not placed"])
+    plt.title("CGPA vs Placement Status")
+    plt.xlabel("Placement Status")
+    plt.ylabel("CGPA")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\results\cgpa placement status.png")
+    plt.show()
 
 if __name__=="__main__":
     df=load_data()
     basic_eda(df)
     univariate(df)
+    bivariate(df)
