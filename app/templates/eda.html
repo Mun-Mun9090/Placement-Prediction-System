@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="card">
-    <h2>Exploratory Data Analysis (EDA)</h2>
-    <p>Visualizations and insights extracted from the dataset. Understand the feature distributions, correlations, and key metrics influencing placements.</p>
-</div>
+<h2>Exploratory Data Analysis (EDA)</h2>
+<h3>CGPA Histograms</h3>
+<img src="{{ url_for('serve_chart', filename='cgpa_stats.png')}}" width="600">
+<p>Visualizing the distribution of CGPA </p>
+<br>
+
+<h3>CGPA v/S Placement Status Box</h3>
+<img src="{{ url_for('serve_chart', filename='cgpa placement status.png')}}" width="600">
+<p> Visualizing the differnce in CGPA and Placement Status</p>
+
 {% endblock %}
+
