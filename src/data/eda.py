@@ -7,7 +7,23 @@ import pandas as pd
 from src.data.load_data import load_data
 import matplotlib.pyplot as plt
 import os
-os.makedirs(r"E:\PythonProject\Placement_Prediction_System\app\static\results", exist_ok=True)
+import shutil
+results_dir = r"E:\PythonProject\Placement_Prediction_System\results"
+charts_dir = r"E:\PythonProject\Placement_Prediction_System\app\static\charts"
+# Ensure charts directory exists
+os.makedirs(charts_dir, exist_ok=True)
+# Move any existing images from old results directory into charts
+if os.path.isdir(results_dir):
+    for fname in os.listdir(results_dir):
+        src = os.path.join(results_dir, fname)
+        dst = os.path.join(charts_dir, fname)
+        try:
+            if os.path.exists(dst):
+                os.remove(dst)
+            shutil.move(src, dst)
+        except Exception:
+            pass
+
 def basic_eda(df):
     print("First five rows")
     print(df.head())
@@ -40,7 +56,7 @@ def basic_eda(df):
     plt.title("Distribution of Placement Status")
     plt.xlabel("Placement Status")
     plt.ylabel("Count")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\placement_status.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\placement_status.png")
     plt.show()
 
 def univariate(df):
@@ -49,14 +65,14 @@ def univariate(df):
     plt.title("Histogram of CGPA")
     plt.xlabel("CGPA")
     plt.ylabel("Frequency")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\cgpa_stats.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa_stats.png")
     plt.show()
     gendercount = df["Gender"].value_counts()
     plt.figure(figsize=(6,5))
     plt.pie(gendercount,labels=gendercount.index,autopct="%1.1f%%",startangle=90)
     plt.title("Distribution of Gender")
     plt.xlabel("Gender")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\gender_count.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\gender_count.png")
     plt.show()
 
 def bivariate(df):
@@ -67,7 +83,7 @@ def bivariate(df):
     plt.title("CGPA vs Aptitude Score")
     plt.xlabel("CGPA")
     plt.ylabel("Aptitude Score")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\cgpa aptitude scores.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa aptitude scores.png")
     plt.show()
     plt.close()
 
@@ -78,7 +94,7 @@ def bivariate(df):
     plt.title("CGPA vs Placement Status")
     plt.xlabel("Placement Status")
     plt.ylabel("CGPA")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\cgpa placement status.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa placement status.png")
     plt.show()
     plt.close()
 
@@ -88,7 +104,7 @@ def bivariate(df):
     plt.title("Distribution of Gender")
     plt.xlabel("Gender")
     plt.ylabel("Count")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\gender_count.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\gender_count.png")
     plt.show()
     plt.close()
 
@@ -98,7 +114,7 @@ def multivariate(df):
     plt.figure(figsize=(6,5))
     sns.heatmap(correlation,annot=True,cmap="coolwarm",fmt=".2f")
     plt.title("Correlation HeatMap")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\results\CGPA correlation heatmap.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\CGPA correlation heatmap.png")
     plt.show()
 
 
