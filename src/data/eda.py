@@ -43,7 +43,7 @@ def basic_eda(df):
     print(df.describe())
 
     print("Missing values: ")
-    print(df.isnull().sum()>0)
+    print(df.isnull().sum())
 
     print("Duplicate values: ")
     print(df.duplicated().sum())
@@ -71,7 +71,6 @@ def univariate(df):
     plt.figure(figsize=(6,5))
     plt.pie(gendercount,labels=gendercount.index,autopct="%1.1f%%",startangle=90)
     plt.title("Distribution of Gender")
-    plt.xlabel("Gender")
     plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\gender_count.png")
     plt.show()
 
@@ -83,28 +82,28 @@ def bivariate(df):
     plt.title("CGPA vs Aptitude Score")
     plt.xlabel("CGPA")
     plt.ylabel("Aptitude Score")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa aptitude scores.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa_aptitude_scores.png")
     plt.show()
     plt.close()
 
     plt.figure(figsize=(6,5))
     placed=df[df["PlacementStatus"]==1]["CGPA"]
     not_placed=df[df["PlacementStatus"]==0]["CGPA"]
-    plt.boxplot([placed,not_placed],label=["placed","not placed"])
+    plt.boxplot([placed,not_placed],labels=["placed","not placed"])
     plt.title("CGPA vs Placement Status")
     plt.xlabel("Placement Status")
     plt.ylabel("CGPA")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa placement status.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\cgpa_placement_status.png")
     plt.show()
     plt.close()
 
     plt.figure(figsize=(6,5))
     count=pd.crosstab(df["Gender"],df["PlacementStatus"])
     count.plot(kind="bar",stacked=True,rot=0)
-    plt.title("Distribution of Gender")
+    plt.title("Gender vs Placement Status")
     plt.xlabel("Gender")
     plt.ylabel("Count")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\gender_count.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\gender_placement_status.png")
     plt.show()
     plt.close()
 
@@ -114,7 +113,7 @@ def multivariate(df):
     plt.figure(figsize=(6,5))
     sns.heatmap(correlation,annot=True,cmap="coolwarm",fmt=".2f")
     plt.title("Correlation HeatMap")
-    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\CGPA correlation heatmap.png")
+    plt.savefig(r"E:\PythonProject\Placement_Prediction_System\app\static\charts\CGPA_correlation_heatmap.png")
     plt.show()
 
 
