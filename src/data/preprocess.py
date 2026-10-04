@@ -178,6 +178,16 @@ def ordinal_encode_data(X_train, X_test, ordinal_features):
     return X_train, X_test, encoder
 
 
+def split_X_data(df, drop_columns=None):  # for unsupervised learning
+    if drop_columns is None:
+        drop_columns = []
+
+    existing_to_drop = [col for col in drop_columns if col in df.columns]
+    X = df.drop(columns=existing_to_drop)
+
+    return X
+
+
 if __name__ == "__main__":
     # Load dataset
     df = load_data.load_data()

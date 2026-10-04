@@ -70,16 +70,12 @@ def display_tree(model, feature_names):
 
 def main():
 
-    # --------------------------------------------------
-    # 1. Load Data
-    # --------------------------------------------------
+
 
     df = load_data()
 
 
-    # --------------------------------------------------
-    # 2. Split Data
-    # --------------------------------------------------
+
 
     x_train, x_test, y_train, y_test = split_data(
         df,
@@ -92,9 +88,7 @@ def main():
     )
 
 
-    # --------------------------------------------------
-    # 3. Identify Features
-    # --------------------------------------------------
+
 
     numerical_features, categorical_features = identify_features(x_train)
 
@@ -105,9 +99,7 @@ def main():
     print(categorical_features)
 
 
-    # --------------------------------------------------
-    # 4. Define Encoding Features
-    # --------------------------------------------------
+
 
     one_hot_features = [
         "Gender",
@@ -124,9 +116,7 @@ def main():
     ]
 
 
-    # --------------------------------------------------
-    # 5. Handle Missing Values
-    # --------------------------------------------------
+
 
     x_train, x_test, imputer = handle_missing_values(
         x_train,
@@ -137,9 +127,7 @@ def main():
     print("\nMissing Value Handling Completed.")
 
 
-    # --------------------------------------------------
-    # 6. Standardization
-    # --------------------------------------------------
+
 
     x_train, x_test, scaler = standardize_data(
         x_train,
